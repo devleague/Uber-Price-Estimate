@@ -1,7 +1,9 @@
 (function(){
   "use strict";
 
-  var origin = [21.3088619,-157.8086674]; // mic
+  var apiUrl = 'http://localhost:3000/api/';
+
+  var origin = { lat : 21.3088619, lng : -157.8086674}; // mic
 
   var map = L.map('map').setView(origin, 17);
 
@@ -21,6 +23,19 @@
       destinationMarker = L.marker(event.latlng).addTo(map);
     }
 
+    // get price estimates from Uber API via our server
+    getPriceEstimates(origin, event.latlng);
+
   });
+
+  function getPriceEstimates(source, destination) {
+    $.get( apiUrl + 'estimates' )
+    .done(function(data){
+      console.log(data);
+    })
+    .fail(function(err){
+      console.error(err.status, err.responseText);
+    });
+  }
 
 })();
