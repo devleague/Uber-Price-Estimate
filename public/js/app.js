@@ -29,7 +29,10 @@
   });
 
   function getPriceEstimates(source, destination) {
-    $.get( apiUrl + 'estimates' )
+    $.get( apiUrl + 'estimates', {
+      source : JSON.stringify(source),
+      destination : JSON.stringify(destination)
+    })
     .done(function(data){
       console.log(data);
     })
