@@ -1,0 +1,19 @@
+{
+  "name": "uber-price-estimate",
+  "version": "1.0.0",
+  "description": "Front End Price Estimate example",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devleague/Uber-Price-Estimate.git"
+  },
+  "author": "Jon Borgonia <jon@devleague.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devleague/Uber-Price-Estimate/issues"
+  },
+  "homepage": "https://github.com/devleague/Uber-Price-Estimate#readme"
+}
