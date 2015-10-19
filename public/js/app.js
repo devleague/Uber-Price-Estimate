@@ -29,12 +29,13 @@
   });
 
   function getPriceEstimates(source, destination) {
-    $.get( apiUrl + 'estimates', {
+    $.get( apiUrl + 'estimates/price', {
       source : JSON.stringify(source),
       destination : JSON.stringify(destination)
     })
     .done(function(data){
-      console.log(data);
+      var result = JSON.parse(data);
+      console.log(result.prices);
     })
     .fail(function(err){
       console.error(err.status, err.responseText);

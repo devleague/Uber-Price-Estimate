@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/devleague/Uber-Price-Estimate#readme",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "request": "^2.65.0"
   }
 }
