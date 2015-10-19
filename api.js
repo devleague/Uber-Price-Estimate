@@ -91,15 +91,26 @@ router.get('/oauth/cb', function(req, res){
         res.json(results.error);
       } else {
         // got token, send back to client
-        console.log('bearer: ',access_token);
-        res.json({
-          success : true,
-          access_token : access_token
-        });
+        // POPUP Blocker must be disabled, or find workaround, or use redirect instead
+        res.send(closeAndRedirectScript(access_token));
       }
     });
 });
 
+function closeAndRedirectScript(access_token) {
+  return '<script> \
+          if (window.opener != null && !window.opener.closed){ \
+            window.opener.location = "'+redirectAccessTokenUrl(access_token)+'"; \
+            window.close(); \
+          }else{ \
+            document.write("Pop-up blocker prevented proper authorization process. Please disable and re-authorize."); \
+          } \
+          </script>';
+}
+
+function redirectAccessTokenUrl(access_token) {
+  return serverUrl + '#store-auth-token/' + access_token;
+}
 
 function getAuthorizeUrl(){
   return oauth2.getAuthorizeUrl({

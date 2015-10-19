@@ -17,7 +17,7 @@ var PriceView = Backbone.View.extend({
 
       }else{
         // open popup window to authorize
-        window.open(response.popupUrl, "_blank", "scrollbars=1,resizable=1,height=300,width=450");
+        window.open(response.popupUrl, "oauth", "scrollbars=1,resizable=1,height=300,width=450");
       }
     })
     .fail(function(err){

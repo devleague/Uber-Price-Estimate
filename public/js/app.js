@@ -19,6 +19,9 @@
   });
   pricesView.render();
 
+  var router = new Router();
+  Backbone.history.start();
+
   map.on('click', function(event){
     if(destinationMarker){
       // move it
