@@ -13,6 +13,11 @@
 
   var originMarker = L.marker(origin).addTo(map);
   var destinationMarker = null;
+  var prices = new Prices();
+  var pricesView = new PricesView({
+    collection : prices
+  });
+  pricesView.render();
 
   map.on('click', function(event){
     if(destinationMarker){
@@ -34,10 +39,14 @@
       destination : JSON.stringify(destination)
     })
     .done(function(data){
+      prices.reset();
       var result = JSON.parse(data);
-      console.log(result.prices);
+      result.prices.forEach(function(price){
+        prices.add( new Price(price) );
+      });
     })
     .fail(function(err){
+      prices.reset();
       console.error(err.status, err.responseText);
     });
   }
