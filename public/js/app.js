@@ -42,12 +42,24 @@
       prices.reset();
       var result = JSON.parse(data);
       result.prices.forEach(function(price){
-        prices.add( new Price(price) );
+        prices.add( new Price(
+          _.extend(price, {
+            source : origin,
+            destination : {
+              lat : destinationMarker._latlng.lat,
+              lng : destinationMarker._latlng.lng
+            }
+          })
+        ));
       });
     })
     .fail(function(err){
       prices.reset();
-      console.error(err.status, err.responseText);
+      if(err.status && err.responseText){
+        console.error(err.status, err.responseText);
+      }else{
+        console.error(err);
+      }
     });
   }
 

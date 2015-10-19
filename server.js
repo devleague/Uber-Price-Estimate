@@ -1,8 +1,10 @@
 var express = require('express');
 var app = express();
 var api = require('./api');
-app.use(express.static('./public'));
+var bodyParser = require('body-parser');
 
+app.use(express.static('./public'));
+app.use(bodyParser.json());
 app.use('/api', api);
 
 app.listen(process.env.PORT || 3000, function(){
