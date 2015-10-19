@@ -10,5 +10,17 @@
 }).addTo(map);
 
   var originMarker = L.marker(origin).addTo(map);
+  var destinationMarker = null;
+
+  map.on('click', function(event){
+    if(destinationMarker){
+      // move it
+      destinationMarker.setLatLng(event.latlng);
+    }else{
+      // create marker
+      destinationMarker = L.marker(event.latlng).addTo(map);
+    }
+
+  });
 
 })();
