@@ -7,14 +7,20 @@ var PriceView = Backbone.View.extend({
     'click .get-ride' : 'getRide'
   },
   getRide : function(event){
+    var self = this;
     $.post('/api/get_ride', {
       product_id: this.model.get('product_id'),
       source: this.model.get('source'),
-      destination: this.model.get('destination')
+      destination: this.model.get('destination'),
+      auth_token: localStorage['auth_token']
     })
     .done(function(response){
       if(response.success){
-
+        // create a new StatusView
+        var statusView = new StatusView({ model : new Status(response) } );
+        statusView.render();
+        // hide the .get-ride button
+        self.$el.find('.get-ride').remove();
       }else{
         // open popup window to authorize
         window.open(response.popupUrl, "oauth", "scrollbars=1,resizable=1,height=300,width=450");

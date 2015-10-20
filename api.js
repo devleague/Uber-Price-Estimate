@@ -54,7 +54,7 @@ router.post('/get_ride', function(req, res){
 
   // create http request to uber api
   request.post({
-    url : uberApiUrl + 'estimates/price',
+    url : uberApiUrl + 'requests',
     json : uberRequest,
     auth : {
       bearer : req.body.auth_token
@@ -63,6 +63,7 @@ router.post('/get_ride', function(req, res){
     if(err){
       return res.json(err);
     }
+    body.success = true;
     res.json(body);
   });
 
