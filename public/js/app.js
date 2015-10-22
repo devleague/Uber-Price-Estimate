@@ -1,7 +1,7 @@
 (function(){
   "use strict";
 
-  var apiUrl = 'http://localhost:3000/api/';
+  var apiUrl = '/api/';
 
   var origin = { lat : 21.3088619, lng : -157.8086674}; // mic
 
