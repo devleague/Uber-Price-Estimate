@@ -5,7 +5,7 @@ var uberApiUrl = 'https://sandbox-api.uber.com/v1/';
 var uberServerToken = process.env.UBER_SERVER_TOKEN;
 var uberClientID = process.env.UBER_CLIENT_ID;
 var uberClientSecret = process.env.UBER_CLIENT_SECRET;
-var serverUrl = 'http://localhost:' + ( process.env.PORT || 3000 );
+var serverUrl = 'http://' + require("os").hostname() + ':' + ( process.env.PORT || 3000 );
 var oauth2 = new OAuth2(
     uberClientID,
     uberClientSecret,
@@ -20,6 +20,7 @@ router.get('/estimates/price', function(req, res){
   // create http request to uber api
   request.get({
     url : uberApiUrl + 'estimates/price',
+    strictSSL: false,
     qs : {
       server_token : uberServerToken,
       start_latitude : source.lat,
@@ -56,6 +57,7 @@ router.post('/get_ride', function(req, res){
   request.post({
     url : uberApiUrl + 'requests',
     json : uberRequest,
+    strictSSL: false,
     auth : {
       bearer : req.body.auth_token
     }
